@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--colored);
+  border-radius: 6px;
+}
+
+@font-face {
+  src: url("./font/n1.ttf");
+  font-family: "n1";
+}
+@font-face {
+  src: url("./font/n2.ttf");
+  font-family: "n2";
+}
+@font-face {
+  src: url("./font/n3.ttf");
+  font-family: "n3";
+}
+@font-face {
+  src: url("./font/n4.ttf");
+  font-family: "n4";
+}
+@font-face {
+  src: url("./font/n5.ttf");
+  font-family: "n5";
+}
+@font-face {
+  src: url("./font/n6.ttf");
+  font-family: "n6";
+}
+
+.darvish {
+  *,
+  span,
+  div {
+    font-family: var(--font-darvish);
+  }
+}
+.ziba {
+  * {
+    font-family: var(--font-ziba);
+  }
+}
+.parsa {
+  * {
+    font-family: var(--font-parsa);
+  }
+}
+.nazanin {
+  * {
+    font-family: var(--font-nazanin);
+  }
+}
+.lalezar {
+  * {
+    font-family: var(--font-lalezar);
+  }
+}
+.koodak {
+  * {
+    font-family: var(--font-koodak);
+  }
+}
+.khodkar {
+  * {
+    font-family: var(--font-khodkar);
+  }
+}
+.letter-1 {
+  letter-spacing: 1px;
+}
+.mid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mid-c {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.colored {
+  color: var(--colored);
+}
+.hover-colored:hover {
+  color: var(--colored);
+}
+.bg-colored {
+  background: var(--colored);
+}
+.bg-hover-colored:hover {
+  background: var(--colored) !important;
+}
+.text-hidden {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.colored-border {
+  border-color: var(--colored) !important;
+}
+.before-border-colored::before {
+  border-color: var(--colored) !important;
+}
+.pwshh {
+  &:hover {
+    box-shadow: 0 0 10px -4px var(--colored);
+  }
+}
+.pws {
+  box-shadow: 0 0 10px -1px var(--colored);
+}
+.pwshh1 {
+  &:hover {
+    box-shadow: 0 0 10px -1px var(--colored);
+  }
+}
+.hotexcolored:hover {
+  color: var(--colored);
+}
+.no-scroller::-webkit-scrollbar {
+  width: 0px;
+}
+body {
+  cursor: url("./cursor/pointer.cur"), auto; /* Replace with your image path */
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+a,
+button {
+  cursor: url("./cursor/link.cur"), pointer; /* Replace with your image path */
+}
+
+input[type="text"],
+textarea {
+  cursor: url("./cursor/beam.cur"), text; /* Replace with your image path */
+}
+
+button:disabled {
+  cursor: url("./cursor/unavailable.cur"), not-allowed; /* Replace with your image path */
+  opacity: 0.5;
+}
+.wi {
+  filter: brightness(0) invert(1);
+}
