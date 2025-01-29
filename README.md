@@ -13,8 +13,7 @@ Vaultify is a **secure and user-friendly** password manager that helps you **sto
 ## 🛠️ Tech Stack
 
 - **Frontend**: Next.js, React, TypeScript, Tailwind CSS  
-- **State Management**: React Context / Zustand (if applicable)  
-- **Backend (Planned/Connected API)**: [Vaultify API](#)  
+- **State Management**: React Context
 
 ## 📦 Installation
 
@@ -37,11 +36,6 @@ Run the development server:
 npm run dev
 ```
 
-## 🔧 Configuration
-
-- Set up environment variables in a `.env.local` file (if required).  
-- Ensure the **backend API** is running for full functionality.  
-
 ## 📝 Roadmap
 
 🔹 **Improve UI & UX**  
@@ -51,10 +45,6 @@ npm run dev
 ## 🤝 Contributing
 
 Feel free to open an issue or submit a pull request!  
-
-## 📜 License
-
-MIT License. See [`LICENSE`](LICENSE) for details.  
 
 ---
 
