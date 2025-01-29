@@ -190,7 +190,7 @@ export default function DatePicker({
 
   return (
     <>
-      <div className="w-80 p-3 rounded-xl row text-white dark:text-black">
+      <div className="w-80 p-3 rounded-xl row text-white">
         <div className="w-6/12 p-2">
           <div className="p-1 border-2 border-white/10 bg-neutral-950 flex rounded-xl mid">
             <button
@@ -239,7 +239,7 @@ export default function DatePicker({
             </button>
           </div>
         </div>
-        <div className="w-full row text-black">{weekDayNames}</div>
+        <div className="w-full row text-black dark:text-white">{weekDayNames}</div>
         <div className="w-full row">{days}</div>
       </div>
       <div className="w-[calc(100%-320px)] row justify-center max-h-full overflow-y-scroll py-3">
