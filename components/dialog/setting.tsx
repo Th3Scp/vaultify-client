@@ -21,6 +21,8 @@ const sets = [
 ];
 const colors = ["#A294F9", "#F14A00", "#4DA1A9", "#5CB338"];
 
+type FontKey = keyof typeof fonts; 
+
 export default function Setting({
   setIs24Hour,
   is24Hour,
@@ -80,7 +82,7 @@ export default function Setting({
             className="px-3 py-2 rounded-xl font-bold text-lg bg-slate-500/10 w-full letter-1"
             style={{ fontFamily: `var(--font-${e})` }}
           >
-            {fonts[e]}
+            {fonts[e as FontKey]}
           </button>
         </div>
       ))}
