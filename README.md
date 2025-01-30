@@ -1,3 +1,4 @@
+!(image)[https://s6.uupload.ir/files/val_jb04.png]
 # 🔐 Vaultify Client
 
 Vaultify is a **secure and user-friendly** password manager that helps you **store passwords, websites, and tasks** efficiently. This is the **client-side** of the application, built with **Next.js, TypeScript, and Tailwind CSS**.
