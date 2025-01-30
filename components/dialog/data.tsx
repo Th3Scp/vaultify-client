@@ -226,7 +226,7 @@ export default function Data() {
                     htmlFor="encfile"
                     className="p-2 rounded-xl block mid bg-slate-500/10 transition-all text-gray-700 dark:text-gray-500 relative hover:scale-90 mx-1 w-full h-full active:scale-[0.8] dark:hover:text-gray-200 hover:text-gray-900 hover:bg-slate-500/30 border-white/0 cursor-pointer"
                   >
-                    رمزگذاری شده
+                    <div className="mb-10">رمزگذاری شده</div>
                   </label>
                   <Input
                     ref={passIRef}
