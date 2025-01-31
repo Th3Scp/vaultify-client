@@ -5,6 +5,9 @@ import { useContext, useEffect, useState } from "react";
 import { formattedTime } from "@/components/global/formattedTime";
 import { FontContext } from "@/components/fontSw";
 import Data from "@/components/dialog/data";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { TeamSvg } from "@/components/svg/main";
 
 export default function Navbar() {
   const [is24Hour, setIs24Hour] = useState<boolean>(
@@ -40,6 +43,7 @@ export default function Navbar() {
             setIs24Hour={(c) => setIs24Hour((g: boolean) => !g)}
           />
           <Data/>
+          <Team/>
 
           <DigitalClock
             is24Hour={is24Hour}
@@ -105,4 +109,13 @@ function DigitalClock({
 
     </div>
   );
+}
+
+function Team(){
+const router = useRouter();
+  return <>
+  <Button onClick={() => router.push("/team")}>
+          <TeamSvg />
+        </Button>
+  </>
 }
