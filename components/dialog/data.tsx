@@ -167,7 +167,6 @@ export default function Data() {
         <FileDataSvg />
       </Button>
       <MyDialog isOpen={open} setIsOpen={closeHandler}>
-        <div className="w-full h-[400px] px-4 py-10 overflow-y-scroll">
           <div className="">
             <div className="text-xl mb-2">استخراج دیتا ها</div>
             <div className="row w-full">
@@ -240,7 +239,6 @@ export default function Data() {
               </div>
             </div>
           </div>
-        </div>
       </MyDialog>
     </>
   );

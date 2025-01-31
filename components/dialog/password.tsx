@@ -78,17 +78,20 @@ export default function Password() {
         </div>
         <div className="text-lg mx-2">پسورد ها</div>
       </Button>
-      <MyDialog isOpen={open} setIsOpen={setOpen}>
-        <div className="h-10 mid border-b border-white/20 relative">
+      <MyDialog
+        isOpen={open}
+        setIsOpen={setOpen}
+        leftBtns={
           <button
             onClick={closeDialogHandler}
             className="absolute left-3 opacity-75"
           >
             <CloseSvg />
           </button>
-          {selected !== undefined ? (
+        }
+        rightBtns={
+          selected !== undefined ? (
             <>
-              <div className="flex absolute right-0 top-0 h-full">
                 <button
                   onClick={closeInHandler}
                   className="bg-zinc-700/20 h-full px-4 group"
@@ -117,34 +120,30 @@ export default function Password() {
                     </button>
                   </>
                 )}
-              </div>
             </>
           ) : (
             <button
               onClick={addHandler}
-              className="bg-zinc-700/20 h-full absolute right-0 top-0 px-4 group"
+              className="bg-zinc-700/20 h-full px-4 group"
             >
               <div className="group-hover:rotate-180 transition-all colored">
                 <AddSvg />
               </div>
             </button>
+          )
+        }
+        title={<>پسورد ها</>}
+      >
+        <div className="pt-5 pb-16">
+          {editing !== undefined ? (
+            <EditPassword passId={editing} close={editPassFunc} />
+          ) : selected !== undefined ? (
+            <SelectedPassword passId={selected} />
+          ) : create ? (
+            <CreatePassword close={createPassFunc} />
+          ) : (
+            <PasswordsShow setSelected={setSelected} />
           )}
-          <div className="flex mb-1">
-            <div className="text-xl">پسورد ها</div>
-          </div>
-        </div>
-        <div className="h-full relative overflow-y-scroll">
-          <div className="pt-5 pb-16">
-            {editing !== undefined ? (
-              <EditPassword passId={editing} close={editPassFunc} />
-            ) : selected !== undefined ? (
-              <SelectedPassword passId={selected} />
-            ) : create ? (
-              <CreatePassword close={createPassFunc} />
-            ) : (
-              <PasswordsShow setSelected={setSelected} />
-            )}
-          </div>
         </div>
       </MyDialog>
     </>
@@ -204,7 +203,7 @@ function EditPassword({
   return (
     <>
       <div className="mid-c">
-        <div className="flex">
+        <div className="flex w-full">
           <div className="row w-12 mx-3">
             {colors.map((e, i) => (
               <button
@@ -217,7 +216,7 @@ function EditPassword({
               ></button>
             ))}
           </div>
-          <div className="mb-2">
+          <div className="mb-2 w-[calc(100%-100px)]">
             <div className="opacity-90 flex">
               اسم پسورد یا لینک وبسایت
               <div className="text-red-600 mx-2">*</div>
@@ -233,7 +232,7 @@ function EditPassword({
           </div>
         </div>
         <div className="row justify-center">
-          <div className="mb-2 w-6/12 p-2">
+          <div className="mb-2 lg:w-6/12 w-full p-2">
             <div className="opacity-90 flex">
               <CodeSvg />
               <div className="mx-1">پسورد</div>
@@ -248,7 +247,7 @@ function EditPassword({
               )}
             />
           </div>
-          <div className="mb-2 w-6/12 p-2">
+          <div className="mb-2 lg:w-6/12 w-full p-2">
             <div className="opacity-90 flex">
               <EmailSvg />
               <div className="mx-1">ایمیل</div>
@@ -262,7 +261,7 @@ function EditPassword({
               )}
             />
           </div>
-          <div className="mb-2 w-6/12 p-2">
+          <div className="mb-2 lg:w-6/12 w-full p-2">
             <div className="opacity-90 flex">
               <UserSvg />
               <div className="mx-1">یوزرنیم</div>
@@ -276,7 +275,7 @@ function EditPassword({
               )}
             />
           </div>
-          <div className="mb-2 w-6/12 p-2">
+          <div className="mb-2 lg:w-6/12 w-full p-2">
             <div className="opacity-90 flex">
               <UserSvg />
               <div className="mx-1">آیکون</div>
@@ -291,7 +290,7 @@ function EditPassword({
             />
           </div>
         </div>
-        <div className="mb-2 w-6/12 p-2 mid">
+        <div className="mb-2 lg:w-6/12 w-10/12 p-2 mid">
           <Button onClick={edit} className="text-xl w-full">
             تغییر دادن
           </Button>
@@ -466,7 +465,7 @@ function PasswordsShow({ setSelected }: { setSelected: (i: number) => void }) {
       const domain = matchURL(e.name) ? extractDomain(e.name, true) : e.name;
 
       return (
-        <div className="w-6/12 p-2">
+        <div className="lg:w-6/12 w-full p-2">
           <button
             onClick={() => setSelected(e.id)}
             className="rounded-lg w-full h-12 letter-1 bg-neutral-900/20 px-3"
@@ -552,7 +551,7 @@ function CreatePassword({ close }: { close: () => void }) {
   return (
     <>
       <div className="mid-c">
-        <div className="flex">
+        <div className="flex w-full">
           <div className="row w-12 mx-3">
             {colors.map((e, i) => (
               <button
@@ -565,7 +564,7 @@ function CreatePassword({ close }: { close: () => void }) {
               ></button>
             ))}
           </div>
-          <div className="mb-2">
+          <div className="mb-2 w-[calc(100%-100px)]">
             <div className="opacity-90 flex">
               اسم پسورد یا لینک وبسایت
               <div className="text-red-600 mx-2">*</div>
@@ -580,7 +579,7 @@ function CreatePassword({ close }: { close: () => void }) {
           </div>
         </div>
         <div className="row justify-center">
-          <div className="mb-2 w-6/12 p-2">
+          <div className="mb-2 lg:w-6/12 w-full p-2">
             <div className="opacity-90 flex">
               <CodeSvg />
               <div className="mx-1">پسورد</div>
@@ -594,7 +593,7 @@ function CreatePassword({ close }: { close: () => void }) {
               )}
             />
           </div>
-          <div className="mb-2 w-6/12 p-2">
+          <div className="mb-2 lg:w-6/12 w-full p-2">
             <div className="opacity-90 flex">
               <EmailSvg />
               <div className="mx-1">ایمیل</div>
@@ -607,7 +606,7 @@ function CreatePassword({ close }: { close: () => void }) {
               )}
             />
           </div>
-          <div className="mb-2 w-6/12 p-2">
+          <div className="mb-2 lg:w-6/12 w-full p-2">
             <div className="opacity-90 flex">
               <UserSvg />
               <div className="mx-1">یوزرنیم</div>
@@ -620,7 +619,7 @@ function CreatePassword({ close }: { close: () => void }) {
               )}
             />
           </div>
-          <div className="mb-2 w-6/12 p-2">
+          <div className="mb-2 lg:w-6/12 w-full p-2">
             <div className="opacity-90 flex">
               <UserSvg />
               <div className="mx-1">آیکون</div>
@@ -634,7 +633,7 @@ function CreatePassword({ close }: { close: () => void }) {
             />
           </div>
         </div>
-        <div className="mb-2 w-6/12 p-2 mid">
+        <div className="mb-2 lg:w-6/12 w-10/12 p-2 mid">
           <Button onClick={create} className="text-xl w-full">
             ساختن
           </Button>

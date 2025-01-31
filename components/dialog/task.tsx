@@ -19,7 +19,7 @@ import { toast } from "react-toastify";
 import moment from "jalali-moment";
 import Tooltip from "../ui/tooltip";
 import EmptySvg from "../svg/empty";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export function NewTask() {
   const { tasks, changeTasks } = useContext(AppContext);
@@ -51,6 +51,7 @@ export function NewTask() {
   const cancelDatePicked = () => {
     setDatePicked([]);
   };
+
   const createHandler = () => {
     if (nameRef.current!.value.length === 0) {
       toast.warn("لطفا فیلد موضوع تسک را پر کنید");
@@ -71,6 +72,14 @@ export function NewTask() {
     }
   };
 
+  useEffect(() => {
+    if (!open) {
+      setColor(undefined);
+      setDatePicked([]);
+      setWeekDay([]);
+    }
+  }, [open]);
+
   return (
     <>
       <Button onClick={openHandler} className="mid">
@@ -78,22 +87,23 @@ export function NewTask() {
           <AddSvg />
         </div>
       </Button>
-      <MyDialog isOpen={open} setIsOpen={setOpen}>
-        <div className="h-10 mid border-b border-white/20 relative">
+      <MyDialog
+        isOpen={open}
+        setIsOpen={setOpen}
+        leftBtns={
           <button onClick={closeHandler} className="absolute left-3 opacity-75">
             <CloseSvg />
           </button>
-          <div className="flex mb-1">
-            <div className="text-xl">ساخت تسک جدید</div>
-          </div>
-        </div>
-        <div className="overflow-scroll h-full relative">
-          <div className="mid w-full pt-4 pb-10">
-            <div className="w-10/12 row">
+        }
+        title={<>ساخت تسک جدید</>}
+      >
+        <div className="mid w-full pt-4 pb-10">
+          <div className="w-10/12 row">
+            <div className="lg:w-[160px] w-full mb-8 lg:mb-0">
               <CirclePicker
                 color={color}
                 onChange={(e) => setColor(e.hex)}
-                width="160px"
+                width="100%"
                 colors={[
                   "red",
                   "blue",
@@ -115,81 +125,82 @@ export function NewTask() {
                   "coral",
                 ]}
               />
-              <div className="w-[calc(100%-160px)]">
-                <div className="text-xl flex">
-                  <div
-                    className="mx-1 w-3 h-3 rounded-full mt-2"
-                    style={{ background: color }}
-                  ></div>
-                  موضوع تسک
-                </div>
-                <Input
-                  ref={nameRef}
-                  className={clsx(
-                    "mt-3 block w-full rounded-lg border-none dark:bg-white/5 bg-neutral-400 letter-1 text-xl py-1.5 px-3 text-white",
-                    "focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25"
-                  )}
-                />
-                <div className="text-xl mt-2 ms-5">توضیحات</div>
-                <Textarea
-                  ref={descRef}
-                  className={clsx(
-                    "mt-3 block w-full resize-none rounded-lg border-none bg-white/5 py-1.5 px-3 text-sm/6 text-white",
-                    "focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25"
-                  )}
-                  rows={4}
-                />
+            </div>
+            <div className="lg:w-[calc(100%-160px)] w-full">
+              <div className="text-xl flex">
+                <div
+                  className="mx-1 w-3 h-3 rounded-full mt-2"
+                  style={{ background: color }}
+                ></div>
+                موضوع تسک
               </div>
-              <div className="mid mt-3 w-full">
-                <div className="mid-c">
-                  <div className="text-xl">روز های هفته</div>
-                  <div className="mid">
-                    {["ش", "ی", "د", "س", "چ", "پ", "ج"].map((e, i) => (
-                      <Button
-                        onClick={() =>
-                          weekDayChangeHandler(i === 0 ? 6 : i - 1)
-                        }
-                        className={`w-10 h-10 rounded-full mid m-1 ${
-                          weekDay.includes(i === 0 ? 6 : i - 1) &&
-                          "bg-colored text-white bg-hover-colored"
-                        }
+              <Input
+                ref={nameRef}
+                className={clsx(
+                  "mt-3 block w-full rounded-lg border-none dark:bg-white/5 bg-neutral-400 letter-1 text-xl py-1.5 px-3 text-white",
+                  "focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25"
+                )}
+              />
+              <div className="text-xl mt-2 ms-5">توضیحات</div>
+              <Textarea
+                ref={descRef}
+                className={clsx(
+                  "mt-3 block w-full resize-none rounded-lg border-none bg-white/5 py-1.5 px-3 text-sm/6 text-white",
+                  "focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25"
+                )}
+                rows={4}
+              />
+            </div>
+            <div className="mt-3 w-full row justify-center items-center">
+              <div className="mid-c">
+                <div className="text-xl">روز های هفته</div>
+                <div className="mid">
+                  {["ش", "ی", "د", "س", "چ", "پ", "ج"].map((e, i) => (
+                    <Button
+                      onClick={() => weekDayChangeHandler(i === 0 ? 6 : i - 1)}
+                      className={`w-10 h-10 rounded-full mid m-1 ${
+                        weekDay.includes(i === 0 ? 6 : i - 1) &&
+                        "bg-colored text-white bg-hover-colored"
+                      }
                         ${datePicked.length !== 0 && "opacity-60"}
                         `}
-                        disabled={datePicked.length !== 0 ? true : false}
-                        key={i}
+                      disabled={datePicked.length !== 0 ? true : false}
+                      key={i}
+                    >
+                      {e}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+              <div className="mid-c mx-auto mt-8 lg:mt-0">
+                <DatePickerDialog
+                  onChange={dateChangeHandler}
+                  defaultValue={datePicked}
+                />
+                <div className="mt-1">
+                  {datePicked.length !== 0 && (
+                    <div className="mid p-2 rounded-lg border-2 border-white/10">
+                      <button
+                        className="me-auto text-red-600/60 hover:text-red-600/100 transition-all"
+                        onClick={cancelDatePicked}
                       >
-                        {e}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-                <div className="mid-c mx-auto">
-                  <DatePickerDialog
-                    onChange={dateChangeHandler}
-                    defaultValue={datePicked}
-                  />
-                  <div className="mt-1">
-                    {datePicked.length !== 0 && (
-                      <div className="mid p-2 rounded-lg border-2 border-white/10">
-                        <button
-                          className="me-auto text-red-600/60 hover:text-red-600/100 transition-all"
-                          onClick={cancelDatePicked}
-                        >
-                          <TrashSvg />
-                        </button>
-                        <div className="mx-1">{datePicked.length}</div>
-                        زمان انتخاب شده
-                      </div>
-                    )}
-                  </div>
+                        <TrashSvg />
+                      </button>
+                      <div className="mx-1">{datePicked.length}</div>
+                      زمان انتخاب شده
+                    </div>
+                  )}
                 </div>
               </div>
+            </div>
 
-              <div className="w-full mid mt-4">
-                <Button onClick={createHandler} className="text-xl px-12">
-                  ساختن
-                </Button>
-              </div>
+            <div className="w-full mid mt-4">
+              <Button
+                onClick={createHandler}
+                className="text-xl w-10/12 lg:w-6/12 px-12"
+              >
+                ساختن
+              </Button>
             </div>
           </div>
         </div>
@@ -205,8 +216,6 @@ export function TaskShow({
   setId: (e: number | undefined) => void;
 }) {
   const { tasks, setMainDialogData, changeTasks } = useContext(AppContext);
-    const searchParams = useSearchParams();
-    const router = useRouter();
 
   const [open, setOpen] = useState(false);
   const [item, setItem] = useState<TaskType | undefined>();
@@ -268,8 +277,10 @@ export function TaskShow({
     const bg = () => {
       if (!isAfterCreated) return "bg-black/20 dark:bg-white/5";
       if (item!.checked.includes(dayMoment)) return "bg-green-600";
-      if (item!.weekdays !== false && isWeekDay) return "bg-black/50 dark:bg-white/30";
-      if (item!.dates !== false && isDates) return "bg-black/50 dark:bg-white/30";
+      if (item!.weekdays !== false && isWeekDay)
+        return "bg-black/50 dark:bg-white/30";
+      if (item!.dates !== false && isDates)
+        return "bg-black/50 dark:bg-white/30";
       if (item!.weekdays !== false || item!.dates !== false)
         return "bg-black/20 dark:bg-white/5";
       return "bg-black/50 dark:bg-white/30";
@@ -308,15 +319,16 @@ export function TaskShow({
 
   return (
     <>
-      <MyDialog isOpen={open} setIsOpen={(e) => closeHandler()}>
-        <div className="h-10 mid border-b border-white/20 relative">
+      <MyDialog
+        isOpen={open}
+        setIsOpen={(e) => closeHandler()}
+        leftBtns={
           <button onClick={closeHandler} className="absolute left-3 opacity-75">
             <CloseSvg />
           </button>
-          <div className="flex mb-1">
-            <div className="text-xl">تسک</div>
-          </div>
-          <div className="flex absolute right-0 top-0 h-full">
+        }
+        rightBtns={
+          <>
             <button
               onClick={editHandler}
               className="bg-zinc-700/20 h-full px-4 group"
@@ -333,73 +345,73 @@ export function TaskShow({
                 <TrashSvg />
               </div>
             </button>
-          </div>
-        </div>
-        <div className="overflow-scroll h-full relative p-4">
-          {item &&
-            (edit ? (
-              <Edit close={editHandler} id={item.id} />
-            ) : (
-              <div className="pb-5">
-                <div className="text-2xl flex">
-                  <div
-                    className="w-4 h-4 rounded mx-1 mt-1"
-                    style={{ background: item.color }}
-                  ></div>
-                  {item.name}
+          </>
+        }
+        title={<>تسک</>}
+      >
+        {item &&
+          (edit ? (
+            <Edit close={editHandler} id={item.id} />
+          ) : (
+            <div className="pb-5 pt-5">
+              <div className="text-2xl flex">
+                <div
+                  className="w-4 h-4 rounded mx-1 mt-1"
+                  style={{ background: item.color }}
+                ></div>
+                {item.name}
+              </div>
+              <div className="opacity-75 mt-2">{item.desc}</div>
+              <div className="text-3xl text-center mt-5 mb-2 mid">
+                <div className="me-2">
+                  <CalendarEventSvg />
                 </div>
-                <div className="opacity-75 mt-2">{item.desc}</div>
-                <div className="text-3xl text-center mt-5 mb-2 mid">
-                  <div className="me-2">
-                    <CalendarEventSvg />
-                  </div>
-                  روز ها
-                  <div className="row ms-4">
-                    {item.weekdays !== false &&
-                      ["ش", "ی", "د", "س", "چ", "پ"].map((e, i) =>
-                        (item.weekdays as number[]).includes(
-                          i === 0 ? 6 : i - 1
-                        ) ? (
-                          <Button
-                            className="w-10 h-10 rounded-full mid m-1 bg-colored text-white bg-hover-colored text-lg pointer-events-none
+                روز ها
+                <div className="row ms-4">
+                  {item.weekdays !== false &&
+                    ["ش", "ی", "د", "س", "چ", "پ"].map((e, i) =>
+                      (item.weekdays as number[]).includes(
+                        i === 0 ? 6 : i - 1
+                      ) ? (
+                        <Button
+                          className="w-10 h-10 rounded-full mid m-1 bg-colored text-white bg-hover-colored text-lg pointer-events-none
                         "
-                            key={i}
-                          >
-                            {e}
-                          </Button>
-                        ) : (
-                          ""
-                        )
-                      )}
-                  </div>
+                          key={i}
+                        >
+                          {e}
+                        </Button>
+                      ) : (
+                        ""
+                      )
+                    )}
                 </div>
-                <div className="w-full mid">
-                  <div className="row w-full px-9">
-                    {Array.from({ length: 105 }, (_, i) => (
-                      <Day i={i} key={i} />
+              </div>
+              <div className="w-full mid">
+                <div className="row w-full px-9">
+                  {Array.from({ length: 105 }, (_, i) => (
+                    <Day i={i} key={i} />
+                  ))}
+                </div>
+              </div>
+              {item.dates !== false && (
+                <div className="mt-4 mid-c">
+                  <div className="text-2xl text-center mb-2">
+                    روز های انتخاب شده
+                  </div>
+                  <div className="row mid w-8/12">
+                    {(item.dates as DayType[]).map((e, i) => (
+                      <div
+                        className="p-2 border-2 border-white/10 bg-gray-200 dark:bg-neutral-950 rounded-lg m-1"
+                        key={i}
+                      >
+                        {e.year}/{e.month}/{e.day}
+                      </div>
                     ))}
                   </div>
                 </div>
-                {item.dates !== false && (
-                  <div className="mt-4 mid-c">
-                    <div className="text-2xl text-center mb-2">
-                      روز های انتخاب شده
-                    </div>
-                    <div className="row mid w-8/12">
-                      {(item.dates as DayType[]).map((e, i) => (
-                        <div
-                          className="p-2 border-2 border-white/10 bg-gray-200 dark:bg-neutral-950 rounded-lg m-1"
-                          key={i}
-                        >
-                          {e.year}/{e.month}/{e.day}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
-        </div>
+              )}
+            </div>
+          ))}
       </MyDialog>
     </>
   );
@@ -456,32 +468,34 @@ function Edit({ id, close }: { id: number; close: () => void }) {
     <>
       <div className="mid w-full pt-4 pb-10">
         <div className="w-10/12 row">
-          <CirclePicker
-            color={color}
-            onChange={(e) => setColor(e.hex)}
-            width="160px"
-            colors={[
-              "red",
-              "blue",
-              "green",
-              "yellow",
-              "orange",
-              "purple",
-              "pink",
-              "cyan",
-              "magenta",
-              "brown",
-              "gray",
-              "white",
-              "teal",
-              "navy",
-              "lime",
-              "violet",
-              "gold",
-              "coral",
-            ]}
-          />
-          <div className="w-[calc(100%-160px)]">
+          <div className="lg:w-[160px] w-full mb-8 lg:mb-0">
+            <CirclePicker
+              color={color}
+              onChange={(e) => setColor(e.hex)}
+              width="100%"
+              colors={[
+                "red",
+                "blue",
+                "green",
+                "yellow",
+                "orange",
+                "purple",
+                "pink",
+                "cyan",
+                "magenta",
+                "brown",
+                "gray",
+                "white",
+                "teal",
+                "navy",
+                "lime",
+                "violet",
+                "gold",
+                "coral",
+              ]}
+            />
+          </div>
+          <div className="lg:w-[calc(100%-160px)] w-full">
             <div className="text-xl flex">
               <div
                 className="mx-1 w-3 h-3 rounded-full mt-2"
@@ -508,7 +522,7 @@ function Edit({ id, close }: { id: number; close: () => void }) {
               rows={4}
             />
           </div>
-          <div className="mid mt-3 w-full">
+          <div className="mid mt-3 w-full row justify-center items-center">
             <div className="mid-c">
               <div className="text-xl">روز های هفته</div>
               <div className="mid">
@@ -529,7 +543,7 @@ function Edit({ id, close }: { id: number; close: () => void }) {
                 ))}
               </div>
             </div>
-            <div className="mid-c mx-auto">
+            <div className="mid-c mx-auto mt-8 lg:mt-0">
               <DatePickerDialog
                 onChange={dateChangeHandler}
                 defaultValue={datePicked}
@@ -552,7 +566,7 @@ function Edit({ id, close }: { id: number; close: () => void }) {
           </div>
 
           <div className="w-full mid mt-4">
-            <Button onClick={editHandler} className="text-xl px-12">
+            <Button onClick={editHandler} className="text-xl w-10/12 lg:w-6/12 px-12">
               تغییر دادن
             </Button>
           </div>
@@ -579,7 +593,7 @@ export function TasksShow() {
     setItems(tasks());
   };
   const showHandler = (id: number) => {
-    router.push(`?taskShow=${id}`)
+    router.push(`?taskShow=${id}`);
   };
 
   useEffect(() => {

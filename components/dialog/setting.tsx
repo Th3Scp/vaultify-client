@@ -21,7 +21,7 @@ const sets = [
 ];
 const colors = ["#A294F9", "#F14A00", "#4DA1A9", "#5CB338"];
 
-type FontKey = keyof typeof fonts; 
+type FontKey = keyof typeof fonts;
 
 export default function Setting({
   setIs24Hour,
@@ -203,14 +203,18 @@ export default function Setting({
       <Button onClick={() => setIsOpen(true)}>
         <SettingSvg />
       </Button>
-      <MyDialog isOpen={isOpen} setIsOpen={setIsOpen}>
-        <div className="h-10 mid border-b border-white/20 relative">
+      <MyDialog
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        leftBtns={
           <button
             onClick={() => setIsOpen(false)}
             className="absolute left-3 opacity-75"
           >
             <CloseSvg />
           </button>
+        }
+        title={
           <div className="flex mb-1">
             <div className="text-xl">تنظیمات</div>{" "}
             <div className="mx-1 pt-1">{"<"}</div>
@@ -218,7 +222,8 @@ export default function Setting({
               {sets.filter((g) => g.key === wh)[0].name}
             </div>
           </div>
-        </div>
+        }
+      >
         <div className="flex">
           <div className="w-52 h-full p-2">
             {sets.map((e, i) => (

@@ -93,73 +93,72 @@ export default function Websites() {
         </div>
         <div className="text-lg mx-2">وبسایت ها</div>
       </Button>
-      <MyDialog isOpen={open} setIsOpen={setOpen}>
-        <div className="h-10 mid border-b border-white/20 relative">
+      <MyDialog
+        isOpen={open}
+        setIsOpen={setOpen}
+        leftBtns={
           <button
             onClick={closeDialogHandler}
             className="absolute left-3 opacity-75"
           >
             <CloseSvg />
           </button>
-          {selected !== undefined ? (
+        }
+        rightBtns={
+          selected !== undefined ? (
             <>
-              <div className="flex absolute right-0 top-0 h-full">
-                <button
-                  onClick={closeInHandler}
-                  className="bg-zinc-700/20 h-full px-4 group"
-                >
-                  <div className="group-hover:rotate-6 transition-all text-red-600">
-                    <CloseSvg />
-                  </div>
-                </button>
-                {editing === undefined && (
-                  <>
-                    <button
-                      onClick={editHandler}
-                      className="bg-zinc-700/20 h-full px-4 group"
-                    >
-                      <div className="group-hover:rotate-6 transition-all colored">
-                        <EditSvg />
-                      </div>
-                    </button>
-                    <button
-                      onClick={removeHandler}
-                      className="bg-zinc-700/20 h-full px-4 group"
-                    >
-                      <div className="group-hover:rotate-6 transition-all text-yellow-600">
-                        <TrashSvg />
-                      </div>
-                    </button>
-                  </>
-                )}
-              </div>
+              <button
+                onClick={closeInHandler}
+                className="bg-zinc-700/20 h-full px-4 group"
+              >
+                <div className="group-hover:rotate-6 transition-all text-red-600">
+                  <CloseSvg />
+                </div>
+              </button>
+              {editing === undefined && (
+                <>
+                  <button
+                    onClick={editHandler}
+                    className="bg-zinc-700/20 h-full px-4 group"
+                  >
+                    <div className="group-hover:rotate-6 transition-all colored">
+                      <EditSvg />
+                    </div>
+                  </button>
+                  <button
+                    onClick={removeHandler}
+                    className="bg-zinc-700/20 h-full px-4 group"
+                  >
+                    <div className="group-hover:rotate-6 transition-all text-yellow-600">
+                      <TrashSvg />
+                    </div>
+                  </button>
+                </>
+              )}
             </>
           ) : (
             <button
               onClick={addHandler}
-              className="bg-zinc-700/20 h-full absolute right-0 top-0 px-4 group"
+              className="bg-zinc-700/20 h-full px-4 group"
             >
               <div className="group-hover:rotate-180 transition-all colored">
                 <AddSvg />
               </div>
             </button>
+          )
+        }
+        title={<>وبسایت ها</>}
+      >
+        <div className="pt-5 pb-16">
+          {editing !== undefined ? (
+            <EditWebsite webId={editing} close={editPassFunc} />
+          ) : selected !== undefined ? (
+            <SelectedWebsite webId={selected} />
+          ) : create ? (
+            <CreateWebsite close={createPassFunc} />
+          ) : (
+            <WebsiteShow setSelected={setSelected} />
           )}
-          <div className="flex mb-1">
-            <div className="text-xl">وبسایت ها</div>
-          </div>
-        </div>
-        <div className="h-full relative overflow-y-scroll">
-          <div className="pt-5 pb-16">
-            {editing !== undefined ? (
-              <EditWebsite webId={editing} close={editPassFunc} />
-            ) : selected !== undefined ? (
-              <SelectedWebsite webId={selected} />
-            ) : create ? (
-              <CreateWebsite close={createPassFunc} />
-            ) : (
-              <WebsiteShow setSelected={setSelected} />
-            )}
-          </div>
         </div>
       </MyDialog>
     </>
@@ -202,7 +201,7 @@ function EditWebsite({ webId, close }: { webId: number; close: () => void }) {
     <>
       <div className="mid-c">
         <div className="row justify-center">
-          <div className="mb-2 w-6/12 p-2">
+          <div className="mb-2 lg:w-6/12 w-full p-2">
             <div className="opacity-90 flex">
               <TagSvg />
               <div className="mx-1">اسم سایت</div>
@@ -217,7 +216,7 @@ function EditWebsite({ webId, close }: { webId: number; close: () => void }) {
               )}
             />
           </div>
-          <div className="mb-2 w-6/12 p-2">
+          <div className="mb-2 lg:w-6/12 w-full p-2">
             <div className="opacity-90 flex">
               <LinkSvg />
               <div className="mx-1">لینک سایت</div>
@@ -253,7 +252,7 @@ function EditWebsite({ webId, close }: { webId: number; close: () => void }) {
           </div>
         </div>
 
-        <div className="mb-2 w-6/12 p-2 mid">
+        <div className="mb-2 mt-2 lg:w-6/12 w-10/12 p-2 mid">
           <Button onClick={edit} className="text-xl w-full">
             تغییر دادن
           </Button>
@@ -397,7 +396,7 @@ function WebsiteShow({ setSelected }: { setSelected: (i: number) => void }) {
   const Btn = useMemo(() => {
     return function ({ e }: { e: WebType }) {
       return (
-        <div className="w-3/12 p-2">
+        <div className="xl:w-3/12 lg:w-4/12 w-6/12 p-2">
           <button
             onClick={() => setSelected(e.id)}
             className="rounded-lg w-full p-4 letter-1 bg-neutral-900/20 mid-c hover:border-white/10 transition-all border-2 border-white/0 relative"
@@ -455,7 +454,7 @@ function CreateWebsite({ close }: { close: () => void }) {
     } else {
       changeWebsites([
         {
-          id:new Date().getTime(),
+          id: new Date().getTime(),
           name: nameRef.current!.value,
           link: linkRef.current!.value,
           pin: pin,
@@ -470,7 +469,7 @@ function CreateWebsite({ close }: { close: () => void }) {
     <>
       <div className="mid-c">
         <div className="row justify-center">
-          <div className="mb-2 w-6/12 p-2">
+          <div className="mb-2 lg:w-6/12 w-full p-2">
             <div className="opacity-90 flex">
               <TagSvg />
               <div className="mx-1">اسم سایت</div>
@@ -484,7 +483,7 @@ function CreateWebsite({ close }: { close: () => void }) {
               )}
             />
           </div>
-          <div className="mb-2 w-6/12 p-2">
+          <div className="mb-2 lg:w-6/12 w-full p-2">
             <div className="opacity-90 flex">
               <LinkSvg />
               <div className="mx-1">لینک سایت</div>
@@ -519,7 +518,7 @@ function CreateWebsite({ close }: { close: () => void }) {
           </div>
         </div>
 
-        <div className="mb-2 w-6/12 p-2 mid">
+        <div className="mb-2 mt-2 lg:w-6/12 w-10/12 p-2 mid">
           <Button onClick={create} className="text-xl w-full">
             ساختن
           </Button>

@@ -17,13 +17,11 @@ export default function MainDialog() {
   return (
     <MyDialog
       isOpen={mainDialogData.open}
-      setIsOpen={(e) => closeDialogHandler}
+      setIsOpen={closeDialogHandler}
+      title={<>{mainDialogData.title}</>}
     >
       {mainDialogData.open !== false && (
         <>
-          <div className="h-10 mid border-b border-white/20 relative">
-            <div className="text-xl">{mainDialogData.title}</div>
-          </div>
           <div className="mid-c pb-16 h-full">
             {mainDialogData.children}
             <div className="mid mt-4">

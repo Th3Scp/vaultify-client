@@ -8,10 +8,10 @@ import { Button } from "../ui/button";
 
 export default function DatePickerDialog({
   onChange,
-  defaultValue
+  defaultValue,
 }: {
   onChange: (e: DayType[]) => void;
-  defaultValue?:DayType[]
+  defaultValue?: DayType[];
 }) {
   const [open, setOpen] = useState(false);
 
@@ -20,18 +20,19 @@ export default function DatePickerDialog({
   return (
     <>
       <Button onClick={openHandler}>مشخص کردن زمان</Button>
-      <MyDialog isOpen={open} setIsOpen={setOpen}>
-        <div className="h-10 mid border-b border-white/20 relative">
+      <MyDialog
+        isOpen={open}
+        setIsOpen={setOpen}
+        leftBtns={
           <button onClick={closeHandler} className="absolute left-3 opacity-75">
             <CloseSvg />
           </button>
-          <div className="flex mb-1">
-            <div className="text-xl">انتخاب کردن زمان</div>
-          </div>
-        </div>
-        <div className="mid px-3 h-[360px]">
+        }
+        title={<>انتخاب کردن زمان</>}
+      >
+        <div className="mid px-3 h-full">
           <DatePicker
-          disableBefore={true}
+            disableBefore={true}
             multiSelect={true}
             toDaySelected={false}
             onChange={onChange}

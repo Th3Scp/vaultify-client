@@ -33,9 +33,6 @@ export function NoteEdit({
     setOpen(false);
     close();
   };
-  const openHandler = () => {
-    setOpen(true);
-  };
 
   const removeHandler = () => {
     setMainDialogData({
@@ -63,14 +60,15 @@ export function NoteEdit({
 
   return (
     <>
-      <MyDialog isOpen={open} setIsOpen={(e) => closeHandler()}>
-        <div className="h-10 mid border-b border-white/20 relative">
+      <MyDialog
+        isOpen={open}
+        setIsOpen={(e) => closeHandler()}
+        leftBtns={
           <button onClick={closeHandler} className="absolute left-3 opacity-75">
             <CloseSvg />
           </button>
-          <div className="flex mb-1">
-            <div className="text-xl">یادداشت</div>
-          </div>
+        }
+        rightBtns={
           <button
             onClick={removeHandler}
             className="bg-zinc-700/20 h-full px-4 group absolute right-0 top-0"
@@ -79,7 +77,9 @@ export function NoteEdit({
               <TrashSvg />
             </div>
           </button>
-        </div>
+        }
+        title={<>یادداشت</>}
+      >
         {item && (
           <Textarea
             defaultValue={item.text}
@@ -104,15 +104,17 @@ export function NoteCreate() {
   const textRef = useRef<HTMLTextAreaElement>(null);
 
   const closeHandler = () => {
-    const time = new Date().getTime();
-    changeNotes([
-      ...notes(),
-      {
-        id: time,
-        updated: time,
-        text: textRef.current!.value,
-      },
-    ]);
+    if (textRef.current!.value.length !== 0) {
+      const time = new Date().getTime();
+      changeNotes([
+        ...notes(),
+        {
+          id: time,
+          updated: time,
+          text: textRef.current!.value,
+        },
+      ]);
+    }
     setOpen(false);
   };
 
@@ -128,15 +130,16 @@ export function NoteCreate() {
         </div>
       </Button>
 
-      <MyDialog isOpen={open} setIsOpen={(e) => closeHandler()}>
-        <div className="h-10 mid border-b border-white/20 relative">
+      <MyDialog
+        isOpen={open}
+        setIsOpen={(e) => closeHandler()}
+        leftBtns={
           <button onClick={closeHandler} className="absolute left-3 opacity-75">
             <CloseSvg />
           </button>
-          <div className="flex mb-1">
-            <div className="text-xl">یادداشت</div>
-          </div>
-        </div>
+        }
+        title={<>یادداشت</>}
+      >
         <Textarea
           ref={textRef}
           placeholder="نوشتن ..."

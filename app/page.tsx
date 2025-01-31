@@ -22,11 +22,11 @@ export default function Home() {
             <PinedWebsites />
           </div>
         </div>
-        <div className="w-full lg:w-[calc(100%-288px)] p-1 lg:max-h-[calc(100vh-140px)] row">
-          <div className="w-full lg:w-6/12 p-1 h-full">
+        <div className="w-full lg:w-[calc(100%-288px)] p-1 max-h-[calc(100vh-140px)] row">
+          <div className="w-full lg:w-6/12 p-1 lg:h-full min-h-[300px]">
             <Task />
           </div>
-          <div className="w-full lg:w-6/12 p-1 h-full">
+          <div className="w-full lg:w-6/12 p-1 lg:h-full min-h-[300px]">
             <Note />
           </div>
         </div>
