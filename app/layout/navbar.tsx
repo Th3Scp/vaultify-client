@@ -76,7 +76,18 @@ function DigitalClock({
   }, []);
 
   return (
-    <div className="ms-auto mid">
+    <div className="me-auto row justify-center items-center" dir="ltr">
+      
+      <div className="mid-c w-52">
+        <div
+          className="colored text-4xl m-0"
+          style={clockFont !== null ? { fontFamily: clockFont } : undefined}
+        >
+          {formattedTime(is24Hour, time)}
+        </div>
+        <div className="text-lg letter-1">{persianDay}</div>
+      </div>
+
       <div className="text-lg px-7 opacity-80">
         {miladi && (
           <div className="flex">
@@ -92,15 +103,6 @@ function DigitalClock({
         )}
       </div>
 
-      <div className="mid-c w-52">
-        <div
-          className="colored text-4xl m-0"
-          style={clockFont !== null ? { fontFamily: clockFont } : undefined}
-        >
-          {formattedTime(is24Hour, time)}
-        </div>
-        <div className="text-lg letter-1">{persianDay}</div>
-      </div>
     </div>
   );
 }
