@@ -1,0 +1,101 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id             Int         @id @default(autoincrement())
+  created        DateTime    @default(now())
+  email          String      @unique
+  password       String      @db.Text
+  avatar         String
+  teamMembers    teams[]     @relation("teamMembers")
+  teamOwner      teams[]     @relation("teamOwner")
+  userAsTask     tasks[]     @relation("userAsTask")
+  checkedTask    tasks[]     @relation("checkedTask")
+  checkedSubTask sub_tasks[] @relation("checkedSubTask")
+}
+
+model teams {
+  id        Int         @id @default(autoincrement())
+  uuid      String      @unique @default(uuid())
+  created   DateTime    @default(now())
+  name      String
+  avatar    String
+  owner_id  Int
+  perms     Json
+  owner     users       @relation(fields: [owner_id], references: [id], name: "teamOwner")
+  users     users[]     @relation("teamMembers")
+  projects  projects[]
+  tasks     tasks[]
+  sub_tasks sub_tasks[]
+  note      note[]
+}
+
+model projects {
+  id       Int      @id @default(autoincrement())
+  uuid      String      @unique @default(uuid())
+  created  DateTime @default(now())
+  name     String
+  avatar   String
+  deleted  Boolean
+  finished Boolean  @default(false)
+
+  team_id   Int
+  team      teams       @relation(fields: [team_id], references: [id])
+  tasks     tasks[]
+  sub_tasks sub_tasks[]
+  note      note[]
+}
+
+model tasks {
+  id          Int      @id @default(autoincrement())
+  uuid      String      @unique @default(uuid())
+  created     DateTime @default(now())
+  title       String
+  description String   @db.Text
+  color       String
+  finished    Boolean  @default(false)
+
+  team_id    Int
+  team       teams    @relation(fields: [team_id], references: [id])
+  project_id Int
+  project    projects @relation(fields: [project_id], references: [id])
+
+  asUsers       users[]     @relation("userAsTask")
+  checked_users users[]     @relation("checkedTask")
+  sub_tasks     sub_tasks[]
+}
+
+model sub_tasks {
+  id       Int      @id @default(autoincrement())
+  uuid      String      @unique @default(uuid())
+  created  DateTime @default(now())
+  title    String
+  priority Int
+  finished Boolean  @default(false)
+
+  team_id    Int
+  team       teams    @relation(fields: [team_id], references: [id])
+  project_id Int
+  project    projects @relation(fields: [project_id], references: [id])
+  task_id    Int
+  task       tasks    @relation(fields: [task_id], references: [id])
+
+  checked_users users[] @relation("checkedSubTask")
+}
+
+model note {
+  id      Int      @id @default(autoincrement())
+  created DateTime @default(now())
+  text    String   @db.Text
+
+  team_id    Int
+  team       teams    @relation(fields: [team_id], references: [id])
+  project_id Int
+  project    projects @relation(fields: [project_id], references: [id])
+}

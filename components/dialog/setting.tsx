@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import MyDialog from "@/components/ui/dialog";
 import { FontContext } from "@/components/fontSw";
-import { clockFonts, fonts } from "@/config";
+import { clockFonts, colors, fonts } from "@/config";
 import { Switch } from "@headlessui/react";
 import { useContext, useEffect, useState } from "react";
 import {
@@ -19,7 +19,6 @@ const sets = [
   { key: "theme", name: "تم و رنگ", svg: <PaintSvg /> },
   { key: "global", name: "عمومی", svg: <Setting2Svg /> },
 ];
-const colors = ["#A294F9", "#F14A00", "#4DA1A9", "#5CB338"];
 
 type FontKey = keyof typeof fonts;
 

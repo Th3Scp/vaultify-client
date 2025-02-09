@@ -52,6 +52,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
     open: false,
   });
 
+  // ======
+  const [isLogin, setIsLogin] = useState(false);
+  const [user,setUser]=useState({
+    email:"",
+  })
+  // ======
+
   function changePasswords(pass: Password[]) {
     localStorage.setItem("passwords", JSON.stringify(pass));
   }
@@ -118,6 +125,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
   return (
     <AppContext.Provider
       value={{
+        isLogin: isLogin,
+        setIsLogin: setIsLogin,
+        //
+        user: user,
+        setUser: setUser,
+        //
         reload: reload,
         setReload: setReload,
         //

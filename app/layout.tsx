@@ -5,6 +5,8 @@ import Client from "@/components/client";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MainDialog from "@/components/dialog/custom";
+import { colors } from "@/config";
+import { CSSProperties } from "react";
 
 const darvish = localFont({
   src: "./font/darvish.ttf",
@@ -49,6 +51,7 @@ export default function RootLayout({
     <html lang="fa" dir="rtl" className="dark">
       <body
         className={`${ziba.variable} ${parsa.variable} ${nazanin.variable} ${lalezar.variable} ${koodak.variable} ${khodkar.variable} ${darvish.variable} h-[100vh] antialiased dark:bg-zinc-950 bg-neutral-300 text-black dark:text-white`}
+        style={{ "--colored": colors[0] } as CSSProperties}
       >
         <Client>
           <ToastContainer

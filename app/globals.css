@@ -96,9 +96,6 @@
 .hover-colored:hover {
   color: var(--colored);
 }
-.bg-colored {
-  background: var(--colored);
-}
 .bg-hover-colored:hover {
   background: var(--colored) !important;
 }
