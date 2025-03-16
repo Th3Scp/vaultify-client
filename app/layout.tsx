@@ -48,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fa" dir="rtl" className="dark">
+    <html lang="fa" dir="" className="dark">
       <body
         className={`${ziba.variable} ${parsa.variable} ${nazanin.variable} ${lalezar.variable} ${koodak.variable} ${khodkar.variable} ${darvish.variable} h-[100vh] antialiased dark:bg-zinc-950 bg-neutral-300 text-black dark:text-white`}
         style={{ "--colored": colors[0] } as CSSProperties}

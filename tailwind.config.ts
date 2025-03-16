@@ -29,6 +29,9 @@ export default {
   plugins: [
     plugin(({ addComponents }) => {
       const components = {
+        ".colored": {
+          color: "var(--colored)",
+        },
         ".bg-colored": {
           background: "var(--colored)",
         },

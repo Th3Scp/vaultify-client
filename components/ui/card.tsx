@@ -9,7 +9,7 @@ import { AppContext } from "../context";
 import CheckPerm from "../global/checkPerm";
 
 export function TeamCard({ data }: { data: TeamType }) {
-  const { user } = useContext(AppContext);
+  const { user, setTeamDialog } = useContext(AppContext);
   const { t } = useTranslation();
   const router = useRouter();
 
@@ -22,7 +22,12 @@ export function TeamCard({ data }: { data: TeamType }) {
     router.push(`/team/p/${id}`);
   };
 
-  const moreHandler = () => {};
+  const moreHandler = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setTeamDialog({
+      uuid: data.uuid,
+    });
+  };
 
   return (
     <>
@@ -53,11 +58,13 @@ export function TeamCard({ data }: { data: TeamType }) {
             <div className="text-lg ms-1">{data.owner.email.split("@")[0]}</div>
           </div>
           {data.owner.email === user.email ||
-            (CheckPerm(data.perms, user.email, data.uuid) && (
-              <Button className="scale-75" onClick={moreHandler}>
-                <MoreSvg />
-              </Button>
-            ))}
+          CheckPerm(data.perms, user.email, data.uuid) ? (
+            <Button className="scale-75" onClick={moreHandler}>
+              <MoreSvg />
+            </Button>
+          ) : (
+            <></>
+          )}
         </div>
 
         <div className="row w-full max-h-24 overflow-y-autod mt-2">
@@ -69,7 +76,7 @@ export function TeamCard({ data }: { data: TeamType }) {
             data.projects.map((e, i) => (
               <button
                 onClick={(event) => projectHandler(e.name, event)}
-                className="mid border-2 border-white/10 bg-white/5 rounded-xl px-3 py-1 mx-1"
+                className="mid border-2 border-white/10 bg-white/5 rounded-xl px-3 py-1 m-1"
                 key={i}
               >
                 <Image

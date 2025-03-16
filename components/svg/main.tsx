@@ -618,3 +618,222 @@ export const UsersSvg = () => (
     <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
   </svg>
 );
+export const MessageSvg = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="icon icon-tabler icons-tabler-outline icon-tabler-message-2"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M8 9h8" />
+    <path d="M8 13h6" />
+    <path d="M9 18h-3a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-3l-3 3l-3 -3z" />
+  </svg>
+);
+export const CrownSvg = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="icon icon-tabler icons-tabler-outline icon-tabler-crown"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 6l4 6l5 -4l-2 10h-14l-2 -10l5 4z" />
+  </svg>
+);
+export const AdminSvg = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="icon icon-tabler icons-tabler-outline icon-tabler-user-shield"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M6 21v-2a4 4 0 0 1 4 -4h2" />
+    <path d="M22 16c0 4 -2.5 6 -3.5 6s-3.5 -2 -3.5 -6c1 0 2.5 -.5 3.5 -1.5c1 1 2.5 1.5 3.5 1.5z" />
+    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+  </svg>
+);
+export const ProjectSvg = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className="icon icon-tabler icons-tabler-filled icon-tabler-stack"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M20.894 13.553a1 1 0 0 1 -.447 1.341l-8 4a1 1 0 0 1 -.894 0l-8 -4a1 1 0 0 1 .894 -1.788l7.553 3.774l7.554 -3.775a1 1 0 0 1 1.341 .447m-8.887 -8.552q .056 0 .111 .007l.111 .02l.086 .024l.012 .006l.012 .002l.029 .014l.05 .019l.016 .009l.012 .005l8 4a1 1 0 0 1 0 1.788l-8 4a1 1 0 0 1 -.894 0l-8 -4a1 1 0 0 1 0 -1.788l8 -4l.011 -.005l.018 -.01l.078 -.032l.011 -.002l.013 -.006l.086 -.024l.11 -.02l.056 -.005z" />
+  </svg>
+);
+export const TaskSvg = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="icon icon-tabler icons-tabler-outline icon-tabler-list-details"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M13 5h8" />
+    <path d="M13 9h5" />
+    <path d="M13 15h8" />
+    <path d="M13 19h5" />
+    <path d="M3 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+    <path d="M3 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+  </svg>
+);
+export const SubTaskSvg = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="icon icon-tabler icons-tabler-outline icon-tabler-subtask"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M6 9l6 0" />
+    <path d="M4 5l4 0" />
+    <path d="M6 5v11a1 1 0 0 0 1 1h5" />
+    <path d="M12 7m0 1a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-6a1 1 0 0 1 -1 -1z" />
+    <path d="M12 15m0 1a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-6a1 1 0 0 1 -1 -1z" />
+  </svg>
+);
+export const UserGearSvg = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="icon icon-tabler icons-tabler-outline icon-tabler-user-cog"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+    <path d="M6 21v-2a4 4 0 0 1 4 -4h2.5" />
+    <path d="M19.001 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+    <path d="M19.001 15.5v1.5" />
+    <path d="M19.001 21v1.5" />
+    <path d="M22.032 17.25l-1.299 .75" />
+    <path d="M17.27 20l-1.3 .75" />
+    <path d="M15.97 17.25l1.3 .75" />
+    <path d="M20.733 20l1.3 .75" />
+  </svg>
+);
+export const FolderGearSvg = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="icon icon-tabler icons-tabler-outline icon-tabler-folder-cog"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12.5 19h-7.5a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2h4l3 3h7a2 2 0 0 1 2 2v3" />
+    <path d="M19.001 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+    <path d="M19.001 15.5v1.5" />
+    <path d="M19.001 21v1.5" />
+    <path d="M22.032 17.25l-1.299 .75" />
+    <path d="M17.27 20l-1.3 .75" />
+    <path d="M15.97 17.25l1.3 .75" />
+    <path d="M20.733 20l1.3 .75" />
+  </svg>
+);
+export const BackSvg = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M15 6l-6 6l6 6" />
+  </svg>
+);
+export const CheckSvg = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="icon icon-tabler icons-tabler-outline icon-tabler-check"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M5 12l5 5l10 -10" />
+  </svg>
+);
+export const RemoveSvg = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={24}
+    height={24}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="icon icon-tabler icons-tabler-outline icon-tabler-circle-dashed-minus"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M8.56 3.69a9 9 0 0 0 -2.92 1.95" />
+    <path d="M3.69 8.56a9 9 0 0 0 -.69 3.44" />
+    <path d="M3.69 15.44a9 9 0 0 0 1.95 2.92" />
+    <path d="M8.56 20.31a9 9 0 0 0 3.44 .69" />
+    <path d="M15.44 20.31a9 9 0 0 0 2.92 -1.95" />
+    <path d="M20.31 15.44a9 9 0 0 0 .69 -3.44" />
+    <path d="M20.31 8.56a9 9 0 0 0 -1.95 -2.92" />
+    <path d="M15.44 3.69a9 9 0 0 0 -3.44 -.69" />
+    <path d="M9 12h6" />
+  </svg>
+);

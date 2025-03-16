@@ -70,7 +70,7 @@ export default function Setting({
   }, [color]);
 
   const Font = () => (
-    <div className="row">
+    <div className="row h-full">
       <div className="w-full mid text-lg">فونت اصلی</div>
       {Object.keys(fonts).map((e: string, i: number) => (
         <div className="w-6/12 md:w-4/12 p-2" key={i}>
@@ -113,7 +113,7 @@ export default function Setting({
   );
 
   const Theme = () => (
-    <div className="">
+    <div className=" h-full">
       <div className="text-xl">تم رنگی</div>
       <div className="flex">
         <button className="p-3 m-1" onClick={() => toggleTheme("light")}>
@@ -141,7 +141,7 @@ export default function Setting({
   );
 
   const Global = () => (
-    <div className="">
+    <div className=" h-full">
       <div className="p-2">
         <div className="flex">
           <div className="">تاریخ میلادی</div>
@@ -224,23 +224,23 @@ export default function Setting({
         }
       >
         <div className="flex">
-          <div className="w-52 h-full p-2">
-            {sets.map((e, i) => (
-              <button
-                className={`text-xl py-1 px-3 rounded-md w-full transition-all flex my-1 ${
-                  wh === e.key
-                    ? "dark:text-white dark:bg-white/10 text-black bg-gray-700/20"
-                    : "dark:text-white/50 dark:hover:bg-white/5 text-black/70 hover:bg-gray-700/5"
-                }`}
-                onClick={() => setWh(e.key)}
-                key={i}
-              >
-                {e.svg}
-                <div className="mx-1">{e.name}</div>
-              </button>
-            ))}
+          <div className="w-52 h-full p-2 reltive">
+              {sets.map((e, i) => (
+                <button
+                  className={`text-xl py-1 px-3 rounded-md w-full transition-all flex my-1 ${
+                    wh === e.key
+                      ? "dark:text-white dark:bg-white/10 text-black bg-gray-700/20"
+                      : "dark:text-white/50 dark:hover:bg-white/5 text-black/70 hover:bg-gray-700/5"
+                  }`}
+                  onClick={() => setWh(e.key)}
+                  key={i}
+                >
+                  {e.svg}
+                  <div className="mx-1">{e.name}</div>
+                </button>
+              ))}
           </div>
-          <div className="w-full overflow-y-scroll h-[360px]">
+          <div className="w-full overflow-y-scroll h-[calc(90vh-40px)] lg:h-[360px]">
             <div className="py-2 ps-4">
               {wh === "font" ? (
                 <Font />

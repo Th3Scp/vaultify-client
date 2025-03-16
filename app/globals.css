@@ -90,9 +90,6 @@
   align-items: center;
   justify-content: center;
 }
-.colored {
-  color: var(--colored);
-}
 .hover-colored:hover {
   color: var(--colored);
 }

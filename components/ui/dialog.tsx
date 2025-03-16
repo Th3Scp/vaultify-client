@@ -8,6 +8,7 @@ export default function MyDialog({
   leftBtns,
   rightBtns,
   title,
+  disabled,
 }: {
   children: ReactNode;
   isOpen: boolean;
@@ -15,18 +16,26 @@ export default function MyDialog({
   leftBtns?: ReactNode;
   rightBtns?: ReactNode;
   title?: ReactNode;
+  disabled?: boolean;
 }) {
   const { font } = useContext(FontContext);
   return (
     <Dialog
       open={isOpen}
-      onClose={() => setIsOpen(false)}
-      className="relative z-50"
+      onClose={
+        disabled === undefined || disabled === false
+          ? () => setIsOpen(false)
+          : () => {}
+      }
+      className={`relative z-50 transiton-all ${disabled === true && "pointer-events-none"}`}
     >
       <div
         className={`fixed inset-0 flex w-screen items-center justify-center p-4 ${font}`}
       >
         <DialogPanel className="w-[700px] bg-neutral-200/50 h-[90vh] lg:h-[400px] backdrop-blur-xl rounded-3xl dark:bg-black/50 border-2 border-white/5 overflow-hidden">
+          {disabled === true && <>
+          <div className="absolute z-50 h-3 bg-red-600"></div>
+          </>}
           {title ? (
             <>
               <div className="h-10 mid border-b border-white/20 relative">

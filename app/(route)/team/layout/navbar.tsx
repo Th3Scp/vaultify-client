@@ -1,28 +1,42 @@
 "use client";
+import { getTeamNav, getTeamNavWProject } from "@/components/actions/team";
 import { AppContext } from "@/components/context";
+import { CookGet } from "@/components/global/cookie";
 import { InboxSvg, SwitchSvg } from "@/components/svg/main";
-import { MotionMXFade, MotionXFade, MotionYFade } from "@/components/ui/animation";
+import {
+  MotionMXFade,
+  MotionXFade,
+  MotionYFade,
+} from "@/components/ui/animation";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useContext, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useContext, useEffect, useState } from "react";
 
 export default function Navbar() {
-  const router = useRouter();
   const { user } = useContext(AppContext);
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
 
   const [navigator, setNavigator] = useState<{
     team: string | false;
     teamAvatar: string;
     project: false | string;
+    projectAvatar: string;
   }>({
     team: false,
     teamAvatar: "/",
     project: false,
+    projectAvatar: "/",
   });
 
   const teamClickHandler = () => {
-    router.push(`/team/${navigator.team}`);
+    if (navigator.team) {
+      router.push("/team");
+    } else {
+      router.push(`/team/s/${navigator.team}`);
+    }
     setNavigator((g) => ({ ...g, project: false }));
   };
   const projectClickHandler = () => {
@@ -31,10 +45,53 @@ export default function Navbar() {
   const homeClickHandler = () => {
     router.push("/team");
   };
+  const fetchTeam = async () => {
+    const res = await getTeamNav({
+      jwt: CookGet("jwt")!,
+      uuid: pathname.split("/")[3],
+    });
+    if (res.status === 200) {
+      setNavigator({
+        team: res.data.name,
+        teamAvatar: res.data.avatar,
+        project: false,
+        projectAvatar: "/",
+      });
+    }
+  };
+  const fetchTeamWProject = async () => {
+    const res = await getTeamNavWProject({
+      jwt: CookGet("jwt")!,
+      uuid: pathname.split("/")[3],
+    });
+    if (res.status === 200) {
+      setNavigator({
+        team: res.data.name,
+        teamAvatar: res.data.avatar,
+        project: res.data.project.name,
+        projectAvatar: res.data.project.avatar,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (pathname.includes("/team/s/")) {
+      fetchTeam();
+    } else if (pathname.includes("/team/p/")) {
+      fetchTeamWProject();
+    } else {
+      setNavigator({
+        team: false,
+        teamAvatar: "/",
+        project: false,
+        projectAvatar: "/",
+      });
+    }
+  }, [searchParams]);
 
   return (
     <>
-      <div className="w-full h-16 fixed top-0 left-0 z-50 mid border-b-2 border-white/5">
+      <div className="w-full h-16 fixed top-0 left-0 z-50 mid border-b-2 border-white/5 backdrop-blur-xl">
         <div className="container flex items-center h-full px-2 py-2 relative">
           <MotionXFade>
             <button onClick={homeClickHandler} className="none md:n-none">
@@ -137,4 +194,3 @@ function Inbox() {
     </>
   );
 }
-

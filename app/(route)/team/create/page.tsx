@@ -45,9 +45,9 @@ export default function Page() {
       name: name,
       avatar: avatar,
     });
-    if(res.status === 200){
-router.push("/team");
-    }else {
+    if (res.status === 200) {
+      router.push("/team");
+    } else {
       toast.warn(t("0E"));
     }
   };

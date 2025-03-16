@@ -1,31 +1,33 @@
 import { cn } from "@/lib/utils";
-import React, { CSSProperties, MouseEvent, ReactNode, useEffect, useState } from "react";
+import React, {
+  ReactNode,
+} from "react";
 
-export const Button = ({
-  children,
-  onClick,
-  disabled = false,
-  className = "",
-  style,
-}: {
-  children: ReactNode;
-  onClick?: () => void;
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
   className?: string;
-  style?: CSSProperties;
-}) => (
-  <button
-    onClick={onClick}
-    disabled={disabled}
-    style={style}
-    className={`p-2 rounded-xl bg-slate-500/10 transition-all text-gray-700 dark:text-gray-500 relative hover:scale-90 mx-1 border-2 ${
-      !disabled
-        ? "active:scale-[0.8] dark:hover:text-gray-200 hover:text-gray-900 hover:bg-slate-500/30 border-white/0"
-        : "border-red-600/20"
-    } ${className}`}
-  >
-    {children}
-  </button>
+}
+
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ children, className = "", disabled = false, ...props }, ref) => {
+    return (
+      <button
+        {...props}
+        ref={ref}
+        disabled={disabled}
+        className={cn(
+          `p-2 rounded-xl bg-slate-500/10 transition-all text-gray-700 dark:text-gray-500 relative hover:scale-90 mx-1 border-2 ${
+            !disabled
+              ? "active:scale-[0.8] dark:hover:text-gray-200 hover:text-gray-900 hover:bg-slate-500/30 border-white/0"
+              : "border-red-600/20"
+          }`,
+          className
+        )}
+      >
+        {children}
+      </button>
+    );
+  }
 );
 
 interface InteractiveHoverButtonProps
@@ -39,7 +41,7 @@ export const InteractiveHoverButton = React.forwardRef<
 >(({ children, className, icon, ...props }, ref) => {
   return (
     <button
-    dir="ltr"
+      dir="ltr"
       ref={ref}
       className={cn(
         "group relative w-full cursor-pointer overflow-hidden rounded-full border bg-background p-2 px-6 text-center font-semibold dark:bg-gray-800 dark:border-gray-700",
@@ -64,4 +66,3 @@ export const InteractiveHoverButton = React.forwardRef<
 });
 
 InteractiveHoverButton.displayName = "InteractiveHoverButton";
-

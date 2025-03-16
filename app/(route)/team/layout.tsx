@@ -6,6 +6,7 @@ import Loader from "@/components/ui/loader";
 import Login from "@/components/side/login";
 import { CookGet } from "@/components/global/cookie";
 import { chechIsLogin } from "@/components/actions/login";
+import TeamSettingDialog from "@/components/dialog/team";
 
 export default function RootLayout({
   children,
@@ -41,6 +42,8 @@ export default function RootLayout({
         <Login />
       ) : (
         <>
+          <TeamSettingDialog />
+
           <Navbar />
           <div className="w-full min-h-full pt-16 mid-c pb-10">{children}</div>
         </>

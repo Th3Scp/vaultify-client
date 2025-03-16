@@ -18,43 +18,47 @@ model users {
   userAsTask     tasks[]     @relation("userAsTask")
   checkedTask    tasks[]     @relation("checkedTask")
   checkedSubTask sub_tasks[] @relation("checkedSubTask")
+  userAsProject projects[] @relation("userAsProject")
 }
 
 model teams {
-  id        Int         @id @default(autoincrement())
-  uuid      String      @unique @default(uuid())
-  created   DateTime    @default(now())
-  name      String
-  avatar    String
-  owner_id  Int
-  perms     Json
-  owner     users       @relation(fields: [owner_id], references: [id], name: "teamOwner")
-  users     users[]     @relation("teamMembers")
-  projects  projects[]
-  tasks     tasks[]
-  sub_tasks sub_tasks[]
-  note      note[]
+  id          Int           @id @default(autoincrement())
+  uuid        String        @unique @default(uuid())
+  created     DateTime      @default(now())
+  name        String
+  avatar      String
+  description String @db.Text @default("")
+  owner_id    Int
+  perms       Json
+  owner       users         @relation(fields: [owner_id], references: [id], name: "teamOwner")
+  users       users[]       @relation("teamMembers")
+  projects    projects[]
+  tasks       tasks[]
+  sub_tasks   sub_tasks[]
+  teamNote    teamNote[]
+  projectNote projectNote[]
 }
 
 model projects {
   id       Int      @id @default(autoincrement())
-  uuid      String      @unique @default(uuid())
+  uuid     String   @unique @default(uuid())
   created  DateTime @default(now())
   name     String
   avatar   String
-  deleted  Boolean
+  deleted  Boolean  @default(false)
   finished Boolean  @default(false)
 
-  team_id   Int
-  team      teams       @relation(fields: [team_id], references: [id])
-  tasks     tasks[]
-  sub_tasks sub_tasks[]
-  note      note[]
+  team_id     Int
+  team        teams         @relation(fields: [team_id], references: [id])
+  tasks       tasks[]
+  sub_tasks   sub_tasks[]
+  projectNote projectNote[]
+  asUsers users[] @relation("userAsProject")
 }
 
 model tasks {
   id          Int      @id @default(autoincrement())
-  uuid      String      @unique @default(uuid())
+  uuid        String   @unique @default(uuid())
   created     DateTime @default(now())
   title       String
   description String   @db.Text
@@ -73,7 +77,7 @@ model tasks {
 
 model sub_tasks {
   id       Int      @id @default(autoincrement())
-  uuid      String      @unique @default(uuid())
+  uuid     String   @unique @default(uuid())
   created  DateTime @default(now())
   title    String
   priority Int
@@ -89,7 +93,16 @@ model sub_tasks {
   checked_users users[] @relation("checkedSubTask")
 }
 
-model note {
+model teamNote {
+  id      Int      @id @default(autoincrement())
+  created DateTime @default(now())
+  text    String   @db.Text
+
+  team_id Int
+  team    teams @relation(fields: [team_id], references: [id])
+}
+
+model projectNote {
   id      Int      @id @default(autoincrement())
   created DateTime @default(now())
   text    String   @db.Text

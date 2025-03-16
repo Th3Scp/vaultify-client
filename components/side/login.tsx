@@ -34,7 +34,7 @@ export default function Login() {
 
       const send = async () => {
         try {
-          const res = await signUp({ email: email, pass: password });
+          const res = await loginWithPass({ email: email, pass: password });
 
           if (res.status === 201) {
             toast.error(
@@ -156,7 +156,7 @@ export default function Login() {
 
       const send = async () => {
         try {
-          const res = await loginWithPass({ email: email, pass: password });
+          const res = await signUp({ email: email, pass: password });
 
           if (res.status === 201) {
             toast.error(

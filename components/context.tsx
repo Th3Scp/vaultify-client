@@ -1,7 +1,8 @@
 "use client";
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, ReactNode, useState } from "react";
 import { DayType } from "./ui/datepicker";
 
+// Define types
 export type Password = {
   id: number;
   name: string;
@@ -11,12 +12,14 @@ export type Password = {
   username: string;
   icon: string;
 };
+
 export type Website = {
   id: number;
   name: string;
   link: string;
   pin: boolean;
 };
+
 export type Task = {
   id: number;
   name: string;
@@ -27,11 +30,13 @@ export type Task = {
   created: number;
   checked: string[];
 };
+
 export type Note = {
   id: number;
   text: string;
   updated: number;
 };
+
 export type MainDialog =
   | {
       open: true;
@@ -44,113 +49,104 @@ export type MainDialog =
       open: false;
     };
 
-export const AppContext = createContext<any>(null);
+export type TeamDialog =
+  | {
+      uuid: string;
+      createProject?:boolean;
+      projects?:boolean;
+      project?:boolean;
+      users?:boolean;
+      user?:string;
+    }
+  | undefined;
+
+// Define the shape of the context
+export type AppContextType = any;
+
+// Create the context with a default value
+export const AppContext = createContext<AppContextType | null>(null);
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [reload, setReload] = useState(false);
   const [mainDialogData, setMainDialogData] = useState<MainDialog>({
     open: false,
   });
-
-  // ======
   const [isLogin, setIsLogin] = useState(false);
-  const [user,setUser]=useState({
-    email:"",
-  })
-  // ======
+  const [user, setUser] = useState({ email: "" });
+  const [teamDialog, setTeamDialog] = useState<TeamDialog>();
 
-  function changePasswords(pass: Password[]) {
-    localStorage.setItem("passwords", JSON.stringify(pass));
-  }
+  // Helper function to get or initialize localStorage data
+  const getLocalStorageData = <T,>(key: string, defaultValue: T): T => {
+    const storedData = localStorage.getItem(key);
+    return storedData ? JSON.parse(storedData) : defaultValue;
+  };
 
-  function passwords(): Password[] {
-    if (localStorage.passwords) {
-      return JSON.parse(localStorage.passwords);
-    } else {
-      localStorage.setItem("passwords", JSON.stringify([]));
-      return [];
-    }
-  }
+  // Helper function to update localStorage data
+  const updateLocalStorageData = <T,>(key: string, data: T) => {
+    localStorage.setItem(key, JSON.stringify(data));
+    setReload((prev) => !prev); // Trigger a re-render
+  };
 
-  function changeWebsites(web: Website[]) {
-    localStorage.setItem("websites", JSON.stringify(web));
-    setReload((g) => !g);
-  }
+  // Passwords
+  const passwords = (): Password[] => {
+    return getLocalStorageData<Password[]>("passwords", []);
+  };
 
-  function websites(): Website[] {
-    if (localStorage.websites !== undefined) {
-      return JSON.parse(localStorage.websites);
-    } else {
-      localStorage.setItem("websites", JSON.stringify([]));
-      return [];
-    }
-  }
+  const changePasswords = (passwords: Password[]) => {
+    updateLocalStorageData("passwords", passwords);
+  };
 
-  function changeTasks(tasks: Task[]) {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    setReload((g) => !g);
-  }
+  // Websites
+  const websites = (): Website[] => {
+    return getLocalStorageData<Website[]>("websites", []);
+  };
 
-  function tasks(): Task[] {
-    if (localStorage.tasks !== undefined) {
-      return JSON.parse(localStorage.tasks);
-    } else {
-      localStorage.setItem("tasks", JSON.stringify([]));
-      return [];
-    }
-  }
+  const changeWebsites = (websites: Website[]) => {
+    updateLocalStorageData("websites", websites);
+  };
 
-  function changeNotes(notes: Note[]) {
-    localStorage.setItem("notes", JSON.stringify(notes));
-    setReload((g) => !g);
-  }
+  // Tasks
+  const tasks = (): Task[] => {
+    return getLocalStorageData<Task[]>("tasks", []);
+  };
 
-  function notes(): Note[] {
-    if (localStorage.notes !== undefined) {
-      return JSON.parse(localStorage.notes).sort(
-        (a: Note, b: Note) => b.updated - a.updated
-      );
-    } else {
-      localStorage.setItem("notes", JSON.stringify([]));
-      return [];
-    }
-  }
+  const changeTasks = (tasks: Task[]) => {
+    updateLocalStorageData("tasks", tasks);
+  };
 
-  // useEffect(() => {
-  //   localStorage.setItem("tasks", JSON.stringify([]));
-  //   localStorage.setItem("websites", JSON.stringify([]));
-  //   localStorage.setItem("passwords", JSON.stringify([]));
-  // });
+  // Notes
+  const notes = (): Note[] => {
+    const notesData = getLocalStorageData<Note[]>("notes", []);
+    return notesData.sort((a, b) => b.updated - a.updated); // Sort by updated timestamp
+  };
+
+  const changeNotes = (notes: Note[]) => {
+    updateLocalStorageData("notes", notes);
+  };
+
+  // Provide the context value
+  const contextValue: AppContextType = {
+    isLogin,
+    setIsLogin,
+    user,
+    setUser,
+    teamDialog,
+    setTeamDialog,
+    reload,
+    setReload,
+    mainDialogData,
+    setMainDialogData,
+    passwords,
+    changePasswords,
+    websites,
+    changeWebsites,
+    tasks,
+    changeTasks,
+    notes,
+    changeNotes,
+  };
 
   return (
-    <AppContext.Provider
-      value={{
-        isLogin: isLogin,
-        setIsLogin: setIsLogin,
-        //
-        user: user,
-        setUser: setUser,
-        //
-        reload: reload,
-        setReload: setReload,
-        //
-        mainDialogData: mainDialogData,
-        setMainDialogData: setMainDialogData,
-        //
-        passwords: passwords,
-        changePasswords: changePasswords,
-        //
-        websites: websites,
-        changeWebsites: changeWebsites,
-        //
-        tasks: tasks,
-        changeTasks: changeTasks,
-        //
-        notes: notes,
-        changeNotes: changeNotes,
-      }}
-    >
-      {children}
-    </AppContext.Provider>
+    <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
   );
 }
