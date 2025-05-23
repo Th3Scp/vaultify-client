@@ -1,0 +1,165 @@
+Starting deployment of Th3Scp/vaultify-client:main to localhost.
+Preparing container with helper image: ghcr.io/coollabsio/coolify-helper:1.0.8.
+----------------------------------------
+Importing Th3Scp/vaultify-client:main (commit sha HEAD) to /artifacts/cgosgw4g4044w4ocwk8sw0c0.
+Image not found (s0sw0ggcg4o4400kww48ko08:d4ef47f0915b1bd523decff95b8827b53f5c554a). Building new image.
+----------------------------------------
+Building docker image started.
+To check the current progress, click on Show Debug Logs.
+Oops something is not okay, are you okay? 😢
+#0 building with "default" instance using docker driver
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 2.22kB done
+#1 DONE 0.1s
+#2 resolve image config for docker-image://docker.io/docker/dockerfile:1
+#2 DONE 2.9s
+#3 docker-image://docker.io/docker/dockerfile:1@sha256:9857836c9ee4268391bb5b09f9f157f3c91bb15821bb77969642813b0d00518d
+#3 resolve docker.io/docker/dockerfile:1@sha256:9857836c9ee4268391bb5b09f9f157f3c91bb15821bb77969642813b0d00518d 0.1s done
+#3 sha256:9857836c9ee4268391bb5b09f9f157f3c91bb15821bb77969642813b0d00518d 8.40kB / 8.40kB done
+#3 sha256:176b5004df55ffa561c121dd12c0fad3ffe3c014318721c3c3d566008ce2627a 850B / 850B done
+#3 sha256:a7a871c4f80fb0fd80a56efe8fc598eefc7be2ff7d36af617a31da498c779c68 1.26kB / 1.26kB done
+#3 sha256:724f0f61ffc85cf6ad0032c9063f7a74cd6d3590fd1138154820556e0a92073b 0B / 13.16MB 0.1s
+#3 sha256:724f0f61ffc85cf6ad0032c9063f7a74cd6d3590fd1138154820556e0a92073b 2.10MB / 13.16MB 1.0s
+#3 sha256:724f0f61ffc85cf6ad0032c9063f7a74cd6d3590fd1138154820556e0a92073b 9.44MB / 13.16MB 1.2s
+#3 sha256:724f0f61ffc85cf6ad0032c9063f7a74cd6d3590fd1138154820556e0a92073b 13.16MB / 13.16MB 1.4s done
+#3 extracting sha256:724f0f61ffc85cf6ad0032c9063f7a74cd6d3590fd1138154820556e0a92073b 0.1s
+#3 extracting sha256:724f0f61ffc85cf6ad0032c9063f7a74cd6d3590fd1138154820556e0a92073b 0.7s done
+#3 DONE 2.4s
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 2.22kB done
+#1 DONE 0.1s
+#4 [internal] load build definition from Dockerfile
+#4 DONE 0.0s
+#5 [internal] load metadata for docker.io/library/node:18-alpine
+#5 DONE 3.2s
+#6 [internal] load .dockerignore
+#6 transferring context:
+#6 transferring context: 2B done
+#6 DONE 0.2s
+#7 [base 1/1] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+#7 resolve docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e 0.1s done
+#7 sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e 7.67kB / 7.67kB done
+#7 sha256:929b04d7c782f04f615cf785488fed452b6569f87c73ff666ad553a7554f0006 1.72kB / 1.72kB done
+#7 sha256:ee77c6cd7c1886ecc802ad6cedef3a8ec1ea27d1fb96162bf03dd3710839b8da 6.18kB / 6.18kB done
+#7 ...
+#8 [internal] load build context
+#8 transferring context: 2.99MB 0.3s done
+#8 DONE 0.5s
+#7 [base 1/1] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+#7 DONE 0.8s
+#9 [builder 1/4] WORKDIR /app
+#9 DONE 0.3s
+#10 [deps 1/4] RUN apk add --no-cache libc6-compat
+#10 0.475 fetch https://dl-cdn.alpinelinux.org/alpine/v3.21/main/x86_64/APKINDEX.tar.gz
+#10 ...
+#11 [runner 2/6] RUN addgroup --system --gid 1001 nodejs
+#11 DONE 0.5s
+#12 [runner 3/6] RUN adduser --system --uid 1001 nextjs
+#12 DONE 0.6s
+#10 [deps 1/4] RUN apk add --no-cache libc6-compat
+#10 1.393 fetch https://dl-cdn.alpinelinux.org/alpine/v3.21/community/x86_64/APKINDEX.tar.gz
+#10 2.386 (1/3) Installing musl-obstack (1.2.3-r2)
+#10 2.493 (2/3) Installing libucontext (1.3.2-r0)
+#10 2.583 (3/3) Installing gcompat (1.1.0-r4)
+#10 2.701 OK: 10 MiB in 20 packages
+#10 DONE 3.3s
+#13 [deps 2/4] WORKDIR /app
+#13 DONE 0.2s
+#14 [deps 3/4] COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
+#14 DONE 0.4s
+#15 [deps 4/4] RUN   if [ -f yarn.lock ]; then yarn --frozen-lockfile;   elif [ -f package-lock.json ]; then npm ci;   elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile;   else echo "Lockfile not found." && exit 1;   fi
+#15 7.314 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+#15 8.542 npm warn deprecated npmlog@5.0.1: This package is no longer supported.
+#15 10.28 npm warn deprecated gauge@3.0.2: This package is no longer supported.
+#15 10.65 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+#15 10.71 npm warn deprecated jalali-react-datepicker@1.2.3: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+#15 11.20 npm warn deprecated are-we-there-yet@2.0.0: This package is no longer supported.
+#15 12.86 npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+#15 44.92
+#15 44.92 added 536 packages, and audited 537 packages in 44s
+#15 44.92
+#15 44.92 165 packages are looking for funding
+#15 44.92   run `npm fund` for details
+#15 45.05
+#15 45.05 2 vulnerabilities (1 moderate, 1 critical)
+#15 45.05
+#15 45.05 To address issues that do not require attention, run:
+#15 45.05   npm audit fix
+#15 45.05
+#15 45.05 To address all issues, run:
+#15 45.05   npm audit fix --force
+#15 45.05
+#15 45.05 Run `npm audit` for details.
+#15 45.05 npm notice
+#15 45.05 npm notice New major version of npm available! 10.8.2 -> 11.4.1
+#15 45.05 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.1
+#15 45.05 npm notice To update run: npm install -g npm@11.4.1
+#15 45.05 npm notice
+#15 DONE 46.6s
+#16 [builder 2/4] COPY --from=deps /app/node_modules ./node_modules
+#16 DONE 33.6s
+#17 [builder 3/4] COPY . .
+#17 DONE 0.4s
+#18 [builder 4/4] RUN   if [ -f yarn.lock ]; then yarn run build;   elif [ -f package-lock.json ]; then npm run build;   elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build;   else echo "Lockfile not found." && exit 1;   fi
+#18 1.330
+#18 1.330 > vaultify@0.2.0 build
+#18 1.330 > next build
+#18 1.330
+#18 3.127 Attention: Next.js now collects completely anonymous telemetry regarding usage.
+#18 3.127 This information is used to shape Next.js' roadmap and prioritize features.
+#18 3.127 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+#18 3.127 https://nextjs.org/telemetry
+#18 3.127
+#18 3.753    ▲ Next.js 15.1.3
+#18 3.754    - Environments: .env
+#18 3.755
+#18 3.789    Creating an optimized production build ...
+#18 67.05  ✓ Compiled successfully
+#18 67.09    Linting and checking validity of types ...
+#18 90.94
+#18 90.94 Failed to compile.
+#18 90.94
+#18 90.94 ./components/dialog/team.tsx
+#18 90.94 62:20  Error: The `{}` ("empty object") type allows any non-nullish value, including literals like `0` and `""`.
+#18 90.94 - If that's what you want, disable this lint rule with an inline comment or configure the 'allowObjectTypes' rule option.
+#18 90.94 - If you want a type meaning "any object", you probably want `object` instead.
+#18 90.94 - If you want a type meaning "any value", you probably want `unknown` instead.  @typescript-eslint/no-empty-object-type
+#18 90.94
+#18 90.94 ./components/global/passwordHash.ts
+#18 90.94 1:16  Error: A `require()` style import is forbidden.  @typescript-eslint/no-require-imports
+#18 90.94
+#18 90.94 info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+#18 91.84 npm notice
+#18 91.84 npm notice New major version of npm available! 10.8.2 -> 11.4.1
+#18 91.84 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.1
+#18 91.84 npm notice To update run: npm install -g npm@11.4.1
+#18 91.84 npm notice
+#18 ERROR: process "/bin/sh -c if [ -f yarn.lock ]; then yarn run build;   elif [ -f package-lock.json ]; then npm run build;   elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build;   else echo \"Lockfile not found.\" && exit 1;   fi" did not complete successfully: exit code: 1
+------
+> [builder 4/4] RUN   if [ -f yarn.lock ]; then yarn run build;   elif [ -f package-lock.json ]; then npm run build;   elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build;   else echo "Lockfile not found." && exit 1;   fi:
+90.94
+90.94 ./components/global/passwordHash.ts
+90.94 1:16  Error: A `require()` style import is forbidden.  @typescript-eslint/no-require-imports
+90.94
+90.94 info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+91.84 npm notice
+91.84 npm notice New major version of npm available! 10.8.2 -> 11.4.1
+91.84 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.1
+91.84 npm notice To update run: npm install -g npm@11.4.1
+91.84 npm notice
+------
+Dockerfile:32
+--------------------
+31 |
+32 | >>> RUN \
+33 | >>>   if [ -f yarn.lock ]; then yarn run build; \
+34 | >>>   elif [ -f package-lock.json ]; then npm run build; \
+35 | >>>   elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
+36 | >>>   else echo "Lockfile not found." && exit 1; \
+37 | >>>   fi
+38 |
+--------------------
+ERROR: failed to solve: process "/bin/sh -c if [ -f yarn.lock ]; then yarn run build;   elif [ -f package-lock.json ]; then npm run build;   elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build;   else echo \"Lockfile not found.\" && exit 1;   fi" did not complete successfully: exit code: 1
+exit status 1
+Deployment failed. Removing the new version of your application.
+Gracefully shutting down build container: cgosgw4g4044w4ocwk8sw0c0
